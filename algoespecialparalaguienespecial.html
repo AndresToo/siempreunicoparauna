@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background: #f5e6e6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Arial", sans-serif;
+        perspective: 1500px;
+      }
+
+      .magazine {
+        width: 800px;
+        height: 600px;
+        position: relative;
+        transform-style: preserve-3d;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+      }
+
+      @media (max-width: 820px) {
+        .magazine {
+          width: 90vw;
+          height: 80vh;
+          max-height: 600px;
+        }
+
+        .magazine-title {
+          font-size: 2.5em !important;
+        }
+
+        .pink-text {
+          font-size: 1.8em !important;
+        }
+
+        .valentine-question {
+          font-size: 1.8em !important;
+        }
+
+        .btn {
+          padding: 10px 30px !important;
+          font-size: 1em !important;
+        }
+
+        .decorative-frame {
+          padding: 20px !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .magazine-title {
+          font-size: 2em !important;
+        }
+
+        .pink-text {
+          font-size: 1.5em !important;
+        }
+
+        .valentine-question {
+          font-size: 1.5em !important;
+        }
+
+        .btn {
+          padding: 8px 20px !important;
+          margin: 5px !important;
+        }
+      }
+      .images {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+      }
+      .images img {
+        width: 40%;
+        max-width: 150px;
+        border-radius: 10px;
+      }
+
+      .page {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transform-origin: left center;
+        transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+        transform-style: preserve-3d;
+        cursor: pointer;
+      }
+
+      .front-cover,
+      .back-cover,
+      .page-front,
+      .page-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        background: white;
+        padding: 20px;
+        box-sizing: border-box;
+        border-radius: 0 10px 10px 0;
+      }
+
+      .front-cover {
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        overflow: hidden;
+      }
+
+      .page-front {
+        background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
+        transform: rotateY(0deg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .page-back {
+        background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+        transform: rotateY(180deg);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .page2 {
+        transform: translateX(100%) rotateY(0deg);
+      }
+
+      .magazine-title {
+        font-size: 4.5em;
+        font-weight: bold;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        margin-bottom: 30px;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        position: relative;
+        z-index: 2;
+        text-align: center;
+      }
+
+      .decorative-frame {
+        border: 8px solid rgba(255, 255, 255, 0.3);
+        padding: 40px;
+        border-radius: 20px;
+        position: relative;
+        margin: 20px;
+        font-family: "Pacifico";
+      }
+
+      .pink-content {
+        text-align: center;
+        color: white;
+        padding: 40px;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+
+      .pink-text {
+        font-size: 2.5em;
+        color: rebeccapurple;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+
+      .question-container {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 80%;
+      }
+
+      .valentine-question {
+        font-size: 2.5em;
+        color: #ff4b6e;
+        margin-bottom: 30px;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .read-first-btn {
+        background: linear-gradient(45deg, #4caf50, #45a049);
+        margin-bottom: 20px;
+      }
+
+      .btn {
+        padding: 15px 40px;
+        font-size: 1.2em;
+        margin: 10px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s;
+        background: linear-gradient(45deg, #ff6b6b, #ffc3a0);
+        color: white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+        display: inline-block;
+        font-family: "Pacifico", cursive;
+      }
+
+      .btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .floating-hearts {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .floating-heart {
+        position: absolute;
+        animation: floatHeart var(--duration) linear infinite;
+        left: var(--left);
+        top: var(--top);
+        font-size: var(--size);
+        opacity: 0.7;
+      }
+
+      @keyframes floatHeart {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        100% {
+          transform: translate(var(--moveX), var(--moveY)) rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="magazine">
+      <div class="page" id="cover">
+        <div class="front-cover">
+          <div class="decorative-frame">
+            <div class="magazine-title">Para Jhanyeli Alexandra Cano Ramos</div>
+            <div class="floating-hearts" id="coverHearts"></div>
+            <button class="btn read-first-btn" onclick="mostrarMensaje()">
+              Lee esto antes
+            </button>
+          </div>
+        </div>
+        <div class="page-back">
+          <div class="pink-content">
+            <div class="pink-text">...</div>
+            <div class="pink-text">...</div>
+          </div>
+          <div class="floating-hearts" id="pinkHearts"></div>
+        </div>
+      </div>
+
+      <div class="page page2" id="page2">
+        <div class="page-front">
+          <div class="question-container">
+            <div class="valentine-question">¿Quieres ser mi San Valentín?</div>
+            <div class="images">
+              <img
+                src="https://i.pinimg.com/474x/24/c7/73/24c7739f9c7a21a81856e89b2394e24a.jpg"
+                alt="San Valentín"
+                width="300"
+              />
+              <img
+                src="hola.jpg"
+                alt="Tú y yo"
+              />
+            </div>
+            <div class="buttons">
+              <a
+                href="https://chat.whatsapp.com/Ibs7FTcaK73HJmBvAYLe5y"
+                target="_blank"
+                class="btn"
+                onclick="sayYes(event)"
+                >Sí</a
+              >
+              <a
+                href="https://2no.co/RNsyG4"
+                target="_blank"
+                class="btn"
+                id="noBtn"
+                >No</a
+              >
+            </div>
+          </div>
+          <div class="floating-hearts" id="questionHearts"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function createHearts(container) {
+        for (let i = 0; i < 30; i++) {
+          const heart = document.createElement("div");
+          heart.innerHTML = "❤️";
+          heart.className = "floating-heart";
+          heart.style.setProperty("--left", Math.random() * 100 + "%");
+          heart.style.setProperty("--top", Math.random() * 100 + "%");
+          heart.style.setProperty("--duration", 5 + Math.random() * 10 + "s");
+          heart.style.setProperty("--size", 0.5 + Math.random() * 1 + "em");
+          heart.style.setProperty("--moveX", -50 + Math.random() * 100 + "px");
+          heart.style.setProperty("--moveY", -50 + Math.random() * 100 + "px");
+          container.appendChild(heart);
+        }
+      }
+
+      createHearts(document.getElementById("coverHearts"));
+      createHearts(document.getElementById("pinkHearts"));
+      createHearts(document.getElementById("questionHearts"));
+
+      let currentPage = 0;
+      document.getElementById("cover").addEventListener("click", function () {
+        if (currentPage === 0) {
+          this.style.transform = "rotateY(-180deg)";
+          setTimeout(() => {
+            document.getElementById("page2").style.transform =
+              "translateX(0) rotateY(0deg)";
+          }, 1000);
+          currentPage = 1;
+        }
+      });
+
+      function mostrarMensaje() {
+        swal(
+          "Mensaje Especial",
+          "¿Para qué voy a mentir? Cada que te pienso, quiero estar más y más junto a ti. Te extraño, y eso no lo puedo fingir. Tú me haces sentir lo que jamás sentí, y es por eso que me encanta estar junto a ti. Es que no te quiero dejar ir, pero solo quiero que tú no te quieras alejar de mí...",
+          "info"
+        );
+      }
+
+      function sayYes(event) {
+        alert('Hacer click en "aceptar" ❤️🐒');
+      }
+    </script>
+  </body>
+</html>
