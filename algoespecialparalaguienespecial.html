@@ -8,7 +8,7 @@
         margin: 0;
         padding: 0;
         min-height: 100vh;
-        background: #f5e6e6;
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -108,7 +108,7 @@
       }
 
       .front-cover {
-        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+        background: linear-gradient(135deg, #ff758c, #c0688d);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -254,7 +254,7 @@
             <div class="magazine-title">Para Jhanyeli Alexandra Cano Ramos</div>
             <div class="floating-hearts" id="coverHearts"></div>
             <button class="btn read-first-btn" onclick="mostrarMensaje()">
-              Lee esto antes
+              Leer antes de abrir, espero te guste
             </button>
           </div>
         </div>
@@ -270,33 +270,14 @@
       <div class="page page2" id="page2">
         <div class="page-front">
           <div class="question-container">
-            <div class="valentine-question">¿Quieres ser mi San Valentín?</div>
+            <div class="valentine-question">Feliz cumpleaños de parte de Andres Torres para Jhanyeli Cano</div>
             <div class="images">
               <img
-                src="https://i.pinimg.com/474x/24/c7/73/24c7739f9c7a21a81856e89b2394e24a.jpg"
+                src="https://i.pinimg.com/736x/3f/09/b9/3f09b96fe48c3054faf5d2b61b5df737.jpg"
                 alt="San Valentín"
                 width="300"
               />
-              <img
-                src="hola.jpg"
-                alt="Tú y yo"
-              />
-            </div>
-            <div class="buttons">
-              <a
-                href="https://chat.whatsapp.com/Ibs7FTcaK73HJmBvAYLe5y"
-                target="_blank"
-                class="btn"
-                onclick="sayYes(event)"
-                >Sí</a
-              >
-              <a
-                href="https://2no.co/RNsyG4"
-                target="_blank"
-                class="btn"
-                id="noBtn"
-                >No</a
-              >
+
             </div>
           </div>
           <div class="floating-hearts" id="questionHearts"></div>
@@ -338,8 +319,8 @@
 
       function mostrarMensaje() {
         swal(
-          "Mensaje Especial",
-          "¿Para qué voy a mentir? Cada que te pienso, quiero estar más y más junto a ti. Te extraño, y eso no lo puedo fingir. Tú me haces sentir lo que jamás sentí, y es por eso que me encanta estar junto a ti. Es que no te quiero dejar ir, pero solo quiero que tú no te quieras alejar de mí...",
+          "Happy Birthday",
+          "Feliz 19 años, decirte que eres una persona increible, maravillosa y con un gran corazon, no dudes jamas, sonrié siempre , haci sea por algo que no da risa, pero no quites esa sonrisa de tu rostro, hoy 18 de Junio desearte feliz cumpleaños y que la pases muy, pero muy bonito con las personas que mas quieres, te aprecio bastante por ser fuerte estos ultimo dias, cuidate bastante y no dudes que yo siempre estaré ahi para ti cuando me necesites, como tu estás para mí, un abrazoote enorme, yo sé que eres fuerte maceta 💪, come todas las tortas que puedas jiji, espero que los regalitos fisico que te alcance hayan sido de tu agrado, feliz cumpleaños monita",
           "info"
         );
       }
